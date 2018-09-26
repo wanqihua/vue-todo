@@ -1,0 +1,24 @@
+
+// different font-size for different dpr
+@mixin font-dpr($font-size) {
+  font-size: $font-size;
+  [data-dpr="1"] & {
+    font-size: $font-size * 0.5;
+  }
+  [data-dpr="3"] & {
+    font-size: $font-size * 1.5;
+  }
+}
+
+// font style
+@mixin font($size, $line-height, $color, $align:left) {
+  @include font-dpr($size);
+  line-height: $line-height;
+  color: $color;
+  text-align: $align;
+}
+
+@mixin wh($width, $height){
+  width: $width;
+  height: $height;
+}

@@ -11,8 +11,16 @@ export default {
 </script>
 
 <style lang="scss">
-  @import './components/common/css/index.scss';
+  @import './common/css/index.scss';
+  html,body {
+    background: $background-color-ff;
+    @include wh(100%, 100%);
+  }
   #app {
-    background: $background-color;
+    max-width: 10rem;
+    height: 100%;
+    margin: 0 auto;
+    background: $background-color-f4;
+    overflow: hidden;
   }
 </style>

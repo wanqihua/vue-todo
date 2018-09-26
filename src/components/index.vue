@@ -1,13 +1,20 @@
 <template>
-    <div>TODO</div>
+  <div>
+    <InputCom></InputCom>
+  </div>
 </template>
 
 <script>
-export default {
-
-}
+  import InputCom from './input.vue';
+  export default {
+    data(){
+    },
+    components: {
+      InputCom
+    },
+  }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
 </style>
