@@ -3,14 +3,19 @@
     <div class="test">TODO</div>
     <div class="input_box">
       <input class="input_todo" type="text" placeholder="please input something ..."/>
-      <div class="enter_input">保存</div>
+      <div class="enter_input" @click="save">保存</div>
     </div>
   </div>
 </template>
 
 <script>
   export default {
+    methods:{
+      //保存
+      save: function(){
 
+      }
+    }
   }
 </script>
 
@@ -19,16 +24,17 @@
     @include font($font-size-40, 2em, $color-33, center);
     @include wh(100%, 2em);
     margin: 1rem auto .3rem;
-    border-bottom: 1px solid $color-99;
   }
 
   .input_box {
     @include font($font-size-32, 2em, $color-33, center);
-    @include wh(100%, 2em);
+    @include wh(100%, 7em);
     box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: #e8e8e8;
+    /*padding*/
     .input_todo {
       @include font($font-size-32, 2em, $color-33, center);
       @include wh(70%, 2em);

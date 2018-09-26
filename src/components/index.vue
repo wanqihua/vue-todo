@@ -7,8 +7,6 @@
 <script>
   import InputCom from './input.vue';
   export default {
-    data(){
-    },
     components: {
       InputCom
     },
