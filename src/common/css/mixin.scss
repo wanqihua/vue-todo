@@ -22,3 +22,14 @@
   width: $width;
   height: $height;
 }
+
+//different border-size for different dpr
+@mixin border-dpr($border, $num, $color) {
+  #{$border}: $num solid $color;
+  [data-dpr="2"] & {
+    #{$border}: $num*.5 solid $color;
+  }
+  [data-dpr="3"] & {
+    #{$border}: $num *.334 solid $color;
+  }
+}
