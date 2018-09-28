@@ -20,7 +20,6 @@ export default {
     max-width: 10rem;
     height: 100%;
     margin: 0 auto;
-    background: $background-color-f4;
     overflow: hidden;
   }
 </style>

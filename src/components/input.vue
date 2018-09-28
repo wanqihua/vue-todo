@@ -28,12 +28,13 @@
 
   .input_box {
     @include font($font-size-32, 2em, $color-33, center);
-    @include wh(100%, 7em);
+    @include wh(92%, 7em);
     box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #e8e8e8;
+    background: $background-color-f8;
+    margin: 0 auto;
     /*padding*/
     .input_todo {
       @include font($font-size-32, 2em, $color-33, center);
