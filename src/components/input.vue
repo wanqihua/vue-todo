@@ -3,13 +3,13 @@
     <div class="test">TODO</div>
     <div class="input_box">
       <!--<input class="input_todo" type="text" placeholder="please input something ..."/>-->
-      <div class="input_todo" contenteditable="true"></div>
+      <contenteditable class="input_todo" v-model="newItem" :value="newItem"></contenteditable>
       <div class="enter_input" @click="save">保存</div>
     </div>
     <div class="todo_box">
       <div v-for="item in todoList">
         <div class="had_done" :class="{'done_btn':item.done===true}" @click="doneEvent(item.tiemId)"></div>
-        <p class="todo_time" :class="{'done':item.done===true}">截止时间 {{item.deadline}} </p>
+        <p  :class="[ item.done===true ? 'done todo_time_done' : 'todo_time' ] " >截止时间 {{item.deadline}} </p>
         <p class="todo_detail" :class="{'done':item.done===true}">{{item.todoItem}}</p>
       </div>
     </div>
@@ -17,6 +17,8 @@
 </template>
 
 <script>
+  import contenteditable from './contenteditable.vue';
+  import { createCode } from '../common/js/tool.js';
   export default {
     data(){
       return {
@@ -40,12 +42,24 @@
             "todoItem": "今天下午需要把相关的需求文档熟悉一遍并完成60%的相关功能",
           }
         ],
+        newItem:'',
       }
     },
     methods:{
+      trim(str){
+        return str.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+      },
       // 保存
-      save: function(){
-
+      save(){
+        if( this.trim(this.newItem).length > 0  ){
+          let newList = {};
+          newList.tiemId = createCode();
+          newList.done = false;
+          newList.deadline = '24:00';
+          newList.todoItem = this.newItem;
+          this.todoList.push(newList);
+          this.newItem = ' ';
+        }
       },
       // 已完成点击事件
       doneEvent(id){
@@ -59,6 +73,9 @@
           }
         }
       }
+    },
+    components:{
+      contenteditable,
     }
   }
 </script>
@@ -118,16 +135,16 @@
     background: $background-color-f8;
     >div {
       @include border-dpr(border-bottom, 1px, #999);
-      padding: 1em 0;
+      padding: .5em 0;
       position: relative;
       .had_done {
         position: absolute;
         z-index: 2;
         @include wh(1.25em, 1.25em);
-        top: 1em;
+        top: .5em;
         right: 4vw;
         border-radius: 50%;
-        border: 1px solid #666;
+        border: 1px solid $color-99;
       }
       .done_btn {
         &:after {
@@ -138,17 +155,18 @@
           border-radius: 50%;
           top: .25em;
           right: .25em;
-          background: #666;
+          background: $color-99;
         }
       }
       .todo_time {
         box-sizing: border-box;
-        @include font($font-size-28, 1.25em, $color-33, left);
+        @include font($font-size-28, 1.5em, $color-33, left);
         @include wh(100%, 1.25em);
         font-weight: 500;
         padding-left: 8vw;
-        margin-bottom: 1em;
+        margin-bottom: .5em;
         position: relative;
+        transition: all 1s;
         &:after {
           content: "";
           display: block;
@@ -158,6 +176,17 @@
           left: 4vw;
           background: #3388ff;
         }
+
+      }
+      .todo_time_done {
+        box-sizing: border-box;
+        @include font($font-size-28, 1.5em, $color-33, left);
+        @include wh(100%, 1.25em);
+        font-weight: 400;
+        padding-left: 4vw;
+        margin-bottom: .5em;
+        position: relative;
+        transition: all 1s;
       }
       .todo_detail {
         box-sizing: border-box;
