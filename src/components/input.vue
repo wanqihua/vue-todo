@@ -1,9 +1,8 @@
 <template>
   <div>
-    <div class="test">TODO</div>
+    <!--<div class="test">TODO</div>-->
     <div class="input_box">
-      <!--<input class="input_todo" type="text" placeholder="please input something ..."/>-->
-      <contenteditable class="input_todo" v-model="newItem" :value="newItem"></contenteditable>
+      <textarea class="input_todo" rows="3" placeholder="please input ..." v-model="newItem"></textarea>
       <div class="enter_input" @click="save">保存</div>
     </div>
     <div class="todo_box">
@@ -17,13 +16,12 @@
 </template>
 
 <script>
-  import contenteditable from './contenteditable.vue';
   import { createCode } from '../common/js/tool.js';
   export default {
     data(){
       return {
         todoList:[
-          {
+          /*{
             "tiemId": "2354sdfh23",
             "done": true,
             "deadline": "18:00",
@@ -40,7 +38,7 @@
             "done": false,
             "deadline": "18:00",
             "todoItem": "今天下午需要把相关的需求文档熟悉一遍并完成60%的相关功能",
-          }
+          }*/
         ],
         newItem:'',
       }
@@ -56,9 +54,9 @@
           newList.tiemId = createCode();
           newList.done = false;
           newList.deadline = '24:00';
-          newList.todoItem = this.newItem;
+          newList.todoItem = this.trim(this.newItem);
           this.todoList.push(newList);
-          this.newItem = ' ';
+          this.newItem = '';
         }
       },
       // 已完成点击事件
@@ -75,7 +73,6 @@
       }
     },
     components:{
-      contenteditable,
     }
   }
 </script>
@@ -99,14 +96,14 @@
     margin: 0 auto;
     /*padding*/
     .input_todo {
-      @include font($font-size-32, 1.5em, $color-33, center);
+      @include font($font-size-32, 1.5em, $color-33, left);
       width: 70%;
       max-height: 7em;
       display: block;
       box-sizing: border-box;
       @include border-dpr(border, 1px, $color-topic);
       border-radius: .5em;
-      padding: .25em;
+      padding: 0 .5em;
       min-height: 2em;
       outline: 0;
       word-wrap: break-word;
@@ -160,7 +157,7 @@
       }
       .todo_time {
         box-sizing: border-box;
-        @include font($font-size-28, 1.5em, $color-33, left);
+        @include font($font-size-28, 1.25em, $color-33, left);
         @include wh(100%, 1.25em);
         font-weight: 500;
         padding-left: 8vw;
@@ -180,13 +177,12 @@
       }
       .todo_time_done {
         box-sizing: border-box;
-        @include font($font-size-28, 1.5em, $color-33, left);
+        @include font($font-size-28, 1.25em, $color-33, left);
         @include wh(100%, 1.25em);
         font-weight: 400;
         padding-left: 4vw;
         margin-bottom: .5em;
         position: relative;
-        transition: all 1s;
       }
       .todo_detail {
         box-sizing: border-box;
@@ -197,6 +193,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+        transition: all 1s;
       }
     }
     >div:last-child {
@@ -208,6 +205,7 @@
   .done {
     text-decoration: line-through!important;
     color: $color-99!important;
+    transition: all 1s;
   }
 
 

@@ -1,6 +1,6 @@
 <template>
   <div
-       v-text="innerText"
+       v-text="value"
        :contenteditable = true
        @focus="isLocked = true"
        @blur="isLocked = false"
@@ -38,3 +38,5 @@
     }
   }
 </script>
+<!--use-->
+<!--<contenteditable class="input_todo" v-model="newItem"></contenteditable>-->
